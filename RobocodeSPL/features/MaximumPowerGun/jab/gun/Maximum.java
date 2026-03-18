@@ -13,7 +13,13 @@ public class Maximum extends Gun {
 
 	public void fire() {
 		if (bot.enemy != null) {
-			double bulletPower = Math.min(Rules.MAX_BULLET_POWER, bot.getEnergy() - 0.01);
+			double distance = bot.enemy.distance;
+			double bulletPower;
+			if (distance < 200) {
+				bulletPower = Math.min(Rules.MAX_BULLET_POWER, bot.getEnergy() - 0.01);
+			} else {
+				bulletPower = Math.min(1.5, bot.getEnergy() - 0.01);
+			}
 			if (bot.enemy.energy == 0) {
 				bulletPower = 0;
 			}
